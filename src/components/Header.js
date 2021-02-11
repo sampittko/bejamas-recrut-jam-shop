@@ -2,8 +2,11 @@
 import { jsx } from "theme-ui"
 import { Link } from "gatsby"
 import { Container } from "../components/Grid"
+import useShoppingCart, { actionTypes } from "../hooks/useShoppingCart"
 
 export default function Header() {
+  const [items, updateItems] = useShoppingCart()
+
   return (
     <header sx={styles.header}>
       <Container
@@ -26,10 +29,6 @@ export default function Header() {
     </header>
   )
 }
-
-Header.propTypes = {}
-
-Header.defaultProps = {}
 
 const styles = {
   header: {

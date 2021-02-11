@@ -5,6 +5,7 @@ import { Row, Col } from "../components/Grid"
 import { Container } from "../components/Grid"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import PropTypes from "prop-types"
 
 function ProductTemplate({ pageContext }) {
   const { name, image } = pageContext
@@ -22,6 +23,13 @@ function ProductTemplate({ pageContext }) {
       </Container>
     </Layout>
   )
+}
+
+ProductTemplate.propTypes = {
+  pageContext: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 export default ProductTemplate
