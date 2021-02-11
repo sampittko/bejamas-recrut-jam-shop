@@ -15,7 +15,7 @@ function ProductTemplate({ pageContext }) {
       <Container>
         <Row>
           <Col>
-            <img src={`/products/${image}`} alt={`Vector ${name}`} />
+            <img src={image} alt={`Vector ${name}`} />
           </Col>
           <Col></Col>
         </Row>

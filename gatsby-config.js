@@ -24,8 +24,8 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "indexPage",
-        path: `${__dirname}/src/data/pages/index`,
+        name: "homepage",
+        path: `${__dirname}/src/data/homepage`,
       },
     },
     "gatsby-transformer-sharp",

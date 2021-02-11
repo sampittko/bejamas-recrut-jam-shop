@@ -23,8 +23,8 @@ export default {
   space: [0, 4, 8, 16, 20, 24, 32, 64, 128, 256, 512],
   fontSizes: [12, 14, 16, 20, 24, 32, 36, 42, 48, 54],
   fonts: {
-    heading: "Georgia, \"Times New Roman\", Times, serif",
-    body: "Montserrat, \"Helvetica Neue\", Arial, sans-serif",
+    heading: 'Georgia, "Times New Roman", Times, serif',
+    body: 'Montserrat, "Helvetica Neue", Arial, sans-serif',
   },
   lineHeights: {
     body: 1.5,
@@ -149,6 +149,7 @@ export default {
       fontWeight: "bold",
       cursor: "pointer",
       borderRadius: "4px",
+      textTransform: "uppercase",
     },
   },
   sizes: {
@@ -173,7 +174,7 @@ export default {
     "10/12": "83.333333%",
     "11/12": "91.666667%",
     // eslint-disable-next-line quote-props
-    "1": "100%",
+    1: "100%",
     screen: "100vw",
   },
 }
