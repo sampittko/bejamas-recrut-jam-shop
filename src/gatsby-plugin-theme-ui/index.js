@@ -142,14 +142,22 @@ export default {
       color: "#fff",
       backgroundColor: "accent",
       border: "none",
-      padding: "12px 35px 13px",
       maxWidth: "max-content",
       fontFamily: "body",
-      fontSize: "14px",
       fontWeight: "bold",
       cursor: "pointer",
-      borderRadius: "4px",
       textTransform: "uppercase",
+    },
+    size: {
+      large: {
+        padding: "12px 35px 13px",
+        fontSize: "14px",
+        borderRadius: "4px",
+      },
+      small: {
+        padding: "7px 25px 10px",
+        fontSize: "12px",
+      },
     },
   },
   sizes: {

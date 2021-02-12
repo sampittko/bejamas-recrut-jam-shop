@@ -2,9 +2,10 @@ import { useEffect, useReducer } from "react"
 
 const LOCAL_STORAGE_KEY = "cart"
 
-export const actionTypes = {
+const actionTypes = {
   ADD_ITEM: "ADD_ITEM",
   REMOVE_ITEM: "REMOVE_ITEM",
+  SUBMIT: "SUBMIT",
 }
 
 function shoppingCartReducer(items, action) {
@@ -13,6 +14,8 @@ function shoppingCartReducer(items, action) {
       return [...items, action.item]
     case actionTypes.REMOVE_ITEM:
       return items.filter((item) => item !== action.item)
+    case actionTypes.SUBMIT:
+      return []
     default:
       throw new Error(`Unsupported action type: ${action.type}`)
   }
@@ -33,9 +36,32 @@ export default function useShoppingCart(initialItems = []) {
     init
   )
 
+  function addItem(item) {
+    updateItems({
+      type: actionTypes.ADD_ITEM,
+      item,
+    })
+  }
+
+  function removeItem(item) {
+    updateItems({
+      type: actionTypes.REMOVE_ITEM,
+      item,
+    })
+  }
+
+  function submit() {
+    updateItems({
+      type: actionTypes.SUBMIT,
+    })
+  }
+
+  const isEmpty = items.length === 0
+  const itemsCount = items.length
+
   useEffect(() => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
   }, [items])
 
-  return [items, updateItems]
+  return [items, addItem, removeItem, submit, isEmpty, itemsCount]
 }

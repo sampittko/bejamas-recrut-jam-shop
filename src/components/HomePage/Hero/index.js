@@ -27,7 +27,10 @@ function HomepageHero() {
           />
           <button
             onClick={() => navigate(hero.frontmatter.cta.href)}
-            sx={{ variant: "button.primary", mx: ["auto", null, 0] }}
+            sx={{
+              variant: ["button.primary", "button.size.large"],
+              mx: ["auto", null, 0],
+            }}
           >
             {hero.frontmatter.cta.text}
           </button>

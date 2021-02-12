@@ -1,30 +1,17 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { Link } from "gatsby"
-import { Container } from "../components/Grid"
-import useShoppingCart, { actionTypes } from "../hooks/useShoppingCart"
+import { Container } from "../../components/Grid"
+import ShoppingCart from "./ShoppingCart/"
 
 export default function Header() {
-  const [items, updateItems] = useShoppingCart()
-
   return (
     <header sx={styles.header}>
-      <Container
-        sx={{
-          maxWidth: [
-            "100%",
-            "552px",
-            "732px",
-            "910px",
-            "1100px",
-            "1320px",
-            "1480px",
-          ],
-        }}
-      >
+      <Container sx={styles.container}>
         <Link to="/" sx={styles.mainLink}>
           JAM SHOP
         </Link>
+        <ShoppingCart />
       </Container>
     </header>
   )
@@ -44,5 +31,12 @@ const styles = {
     color: "white",
     fontWeight: "bold",
     fontSize: 22,
+    zIndex: 2,
+  },
+  container: {
+    maxWidth: ["100%", "552px", "732px", "910px", "1100px", "1320px", "1480px"],
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 }
