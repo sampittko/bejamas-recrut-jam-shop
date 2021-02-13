@@ -1,12 +1,14 @@
 /** @jsx jsx */
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { jsx } from "theme-ui"
-import useShoppingCart from "../../../hooks/useShoppingCart"
+import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import Contents from "./Contents"
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false)
-  const [items, _, removeItem, submit, isEmpty, itemsCount] = useShoppingCart()
+  const [items, , removeItem, submit, isEmpty, itemsCount] = useContext(
+    ShoppingCartContext
+  )
 
   return (
     <>
@@ -21,6 +23,9 @@ export default function ShoppingCart() {
           alt=""
           sx={{ ...styles.chevron, ...(open && styles.chevronDown) }}
         />
+        <div sx={{ ...styles.badge, ...(isEmpty && styles.badgeEmpty) }}>
+          {itemsCount}
+        </div>
       </button>
       {open && (
         <Contents
@@ -37,6 +42,7 @@ export default function ShoppingCart() {
 
 const styles = {
   button: {
+    position: "relative",
     display: "flex",
     alignItems: "center",
     color: "#fff",
@@ -44,6 +50,22 @@ const styles = {
     border: "none",
     cursor: "pointer",
     zIndex: 2,
+  },
+  badge: {
+    width: "11px",
+    height: "12px",
+    lineHeight: "12px",
+    textAlign: "center",
+    position: "absolute",
+    fontSize: "8px",
+    top: "7px",
+    paddingLeft: "1px",
+    left: "27px",
+    borderRadius: "25px",
+    backgroundColor: "accent",
+  },
+  badgeEmpty: {
+    backgroundColor: "#301346",
   },
   shoppingCart: {
     width: "30px",
@@ -53,8 +75,9 @@ const styles = {
     width: "9px",
     height: "6px",
     marginLeft: "5px",
+    transform: "rotate(180deg)",
   },
   chevronDown: {
-    transform: "rotate(180deg)",
+    transform: "rotate(0deg)",
   },
 }

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react"
+import { createContext, useEffect, useReducer } from "react"
 
 const LOCAL_STORAGE_KEY = "cart"
 
@@ -13,7 +13,7 @@ function shoppingCartReducer(items, action) {
     case actionTypes.ADD_ITEM:
       return [...items, action.item]
     case actionTypes.REMOVE_ITEM:
-      return items.filter((item) => item !== action.item)
+      return items.filter((item) => item.slug !== action.item.slug)
     case actionTypes.SUBMIT:
       return []
     default:
@@ -65,3 +65,5 @@ export default function useShoppingCart(initialItems = []) {
 
   return [items, addItem, removeItem, submit, isEmpty, itemsCount]
 }
+
+export const ShoppingCartContext = createContext()

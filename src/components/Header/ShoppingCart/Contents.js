@@ -11,14 +11,17 @@ export default function Contents({
   isEmpty,
 }) {
   return (
-    <div sx={styles.wrapper} onClick={onClose}>
-      <Container sx={styles.container}>
+    <>
+      <div sx={styles.overlay} onClick={onClose} />
+      <Container sx={styles.contents}>
         <div sx={styles.listWrapper} onClick={(e) => e.stopPropagation()}>
-          <ol sx={styles.list}>
+          <ul sx={styles.list}>
             {items.map((item) => (
-              <li>{item}</li>
+              <li key={item.slug} onClick={() => onRemoveItem(item)}>
+                {item.name}
+              </li>
             ))}
-          </ol>
+          </ul>
           <div sx={styles.buttonWrapper}>
             <button
               sx={{ variant: ["button.primary", "button.size.small"] }}
@@ -30,22 +33,25 @@ export default function Contents({
           </div>
         </div>
       </Container>
-    </div>
+    </>
   )
 }
 
 const styles = {
-  wrapper: {
+  overlay: {
     position: "fixed",
     top: 0,
     left: 0,
     width: "100vw",
     height: "100vh",
     cursor: "pointer",
-    backdropFilter: "blur(3px)",
+    backdropFilter: "blur(3px) brightness(90%)",
     zIndex: 1,
   },
-  container: {
+  contents: {
+    width: "100%",
+    top: 0,
+    position: "absolute",
     marginTop: "calc(34px + 40px)",
     display: "flex",
     justifyContent: "flex-end",
@@ -64,7 +70,7 @@ const styles = {
   list: {},
   buttonWrapper: {
     position: "absolute",
-    bottom: "25px",
-    right: "25px",
+    bottom: "23px",
+    right: "30px",
   },
 }

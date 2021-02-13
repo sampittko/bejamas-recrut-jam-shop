@@ -11,7 +11,7 @@ function HomepageHero() {
   const hero = data.file.childMarkdownRemark
 
   return (
-    <section sx={{ paddingTop: [60, 60, 105] }}>
+    <section sx={{ paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] }}>
       <Row styles={{ justifyContent: ["center"] }}>
         <Col styles={styles.imgWrapper}>
           <img
