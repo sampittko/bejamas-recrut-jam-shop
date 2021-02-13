@@ -11,12 +11,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             node {
               childMarkdownRemark {
                 frontmatter {
-                  tag
                   slug
-                  price
-                  name
-                  image
-                  description
                 }
               }
             }
@@ -37,13 +32,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   products.forEach((edge) => {
     const product = edge.node.childMarkdownRemark
-    const { slug: path, ...rest } = product.frontmatter
+    const { slug } = product.frontmatter
 
     createPage({
-      path,
+      path: slug,
       component,
       context: {
-        ...rest,
+        slug,
       },
     })
   })

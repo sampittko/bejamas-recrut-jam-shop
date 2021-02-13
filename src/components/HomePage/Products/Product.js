@@ -25,8 +25,8 @@ export default function Product({ product, isInCart }) {
         <p sx={styles.description}>{excerpt}</p>
         <button
           sx={{
-            ...styles.action,
-            ...(isInCart && styles.remove),
+            ...styles.button,
+            ...(isInCart && styles.removeButton),
           }}
           onClick={handleClick}
         >
@@ -43,6 +43,7 @@ Product.propTypes = {
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     excerpt: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
   }).isRequired,
   isInCart: PropTypes.bool.isRequired,
 }
@@ -81,7 +82,7 @@ const styles = {
     color: "light",
     fontSize: 2,
   },
-  action: {
+  button: {
     padding: 0,
     position: "absolute",
     bottom: "10px",
@@ -94,7 +95,8 @@ const styles = {
     textAlign: "center",
     borderRadius: "100%",
   },
-  remove: {
-    backgroundColor: "primary",
+  removeButton: {
+    backgroundColor: "secondary",
+    color: "primary",
   },
 }

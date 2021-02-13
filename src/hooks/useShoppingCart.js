@@ -36,28 +36,61 @@ export default function useShoppingCart(initialItems = []) {
     init
   )
 
-  function addItem(item) {
+  const isEmpty = items.length === 0
+  const itemsCount = items.length
+
+  function addItem(itemToAdd) {
+    if (!itemToAdd) {
+      throw new Error(`Specify item that needs to be added first`)
+    }
+
+    const { slug, name, image, price } = itemToAdd
+
+    if (!slug || !name || !image || !price) {
+      throw new Error(`Cannot add item since there is some missing data`)
+    }
+
     updateItems({
       type: actionTypes.ADD_ITEM,
-      item,
+      item: {
+        slug,
+        name,
+        image,
+        price,
+      },
     })
   }
 
-  function removeItem(item) {
+  function removeItem(itemToRemove) {
+    if (!itemToRemove) {
+      throw new Error(`Specify item that needs to be removed first`)
+    }
+
+    if (!itemToRemove.slug) {
+      throw new Error(`Cannot remove item since there is some missing data`)
+    }
+
+    if (items.every((item) => item.slug !== itemToRemove.slug)) {
+      throw new Error(
+        `Cannot remove item which is not inside the shopping cart`
+      )
+    }
+
     updateItems({
       type: actionTypes.REMOVE_ITEM,
-      item,
+      item: itemToRemove,
     })
   }
 
   function submit() {
+    if (isEmpty) {
+      throw new Error(`Cannot submit empty shopping cart`)
+    }
+
     updateItems({
       type: actionTypes.SUBMIT,
     })
   }
-
-  const isEmpty = items.length === 0
-  const itemsCount = items.length
 
   useEffect(() => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))

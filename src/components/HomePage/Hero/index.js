@@ -6,9 +6,26 @@ import { navigate } from "@reach/router"
 
 import { useStaticQuery, graphql } from "gatsby"
 
+const query = graphql`
+  query {
+    hero: file(sourceInstanceName: { eq: "homepage" }, name: { eq: "hero" }) {
+      childMarkdownRemark {
+        frontmatter {
+          cta {
+            href
+            text
+          }
+          image
+          title
+        }
+      }
+    }
+  }
+`
+
 function HomepageHero() {
   const data = useStaticQuery(query)
-  const hero = data.file.childMarkdownRemark
+  const hero = data.hero.childMarkdownRemark
 
   return (
     <section sx={styles.hero}>
@@ -42,23 +59,6 @@ function HomepageHero() {
 }
 
 export default HomepageHero
-
-const query = graphql`
-  query {
-    file(sourceInstanceName: { eq: "homepage" }, name: { eq: "hero" }) {
-      childMarkdownRemark {
-        frontmatter {
-          cta {
-            href
-            text
-          }
-          image
-          title
-        }
-      }
-    }
-  }
-`
 
 const styles = {
   hero: { paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] },

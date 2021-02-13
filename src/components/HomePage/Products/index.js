@@ -6,6 +6,37 @@ import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import { Row, Col } from "../../Grid"
 import Product from "./Product"
 
+const query = graphql`
+  query {
+    products: allFile(filter: { sourceInstanceName: { eq: "products" } }) {
+      edges {
+        node {
+          childMarkdownRemark {
+            frontmatter {
+              name
+              image
+              excerpt
+              slug
+              price
+            }
+          }
+        }
+      }
+    }
+    section: file(
+      sourceInstanceName: { eq: "homepage" }
+      name: { eq: "products" }
+    ) {
+      childMarkdownRemark {
+        frontmatter {
+          title
+          lead
+        }
+      }
+    }
+  }
+`
+
 function HomepageProducts() {
   const data = useStaticQuery(query)
   const [{ items }] = useContext(ShoppingCartContext)
@@ -42,37 +73,6 @@ function HomepageProducts() {
     </section>
   )
 }
-
-const query = graphql`
-  query {
-    products: allFile(filter: { sourceInstanceName: { eq: "products" } }) {
-      edges {
-        node {
-          childMarkdownRemark {
-            frontmatter {
-              name
-              image
-              excerpt
-              slug
-              price
-            }
-          }
-        }
-      }
-    }
-    section: file(
-      sourceInstanceName: { eq: "homepage" }
-      name: { eq: "products" }
-    ) {
-      childMarkdownRemark {
-        frontmatter {
-          title
-          lead
-        }
-      }
-    }
-  }
-`
 
 const styles = {
   products: { paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] },
