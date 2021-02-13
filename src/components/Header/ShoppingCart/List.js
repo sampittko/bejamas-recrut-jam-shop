@@ -3,22 +3,20 @@ import React, { useContext } from "react"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import { Container } from "../../Grid"
+import PropTypes from "prop-types"
+import Item from "./Item"
 
-export default function Contents({ onClose }) {
-  const [{ items, isEmpty }, { removeItem, submit }] = useContext(
-    ShoppingCartContext
-  )
+export default function List({ onClose }) {
+  const [{ items, isEmpty }, { submit }] = useContext(ShoppingCartContext)
 
   return (
     <>
       <div sx={styles.overlay} onClick={onClose} />
-      <Container sx={styles.contents}>
-        <div sx={styles.listWrapper} onClick={(e) => e.stopPropagation()}>
-          <ul>
-            {items.map((item) => (
-              <li key={item.slug} onClick={() => removeItem(item)}>
-                {item.name}
-              </li>
+      <Container sx={styles.list}>
+        <div sx={styles.contentsWrapper} onClick={(e) => e.stopPropagation()}>
+          <ul sx={styles.contents}>
+            {items.map((item, i) => (
+              <Item key={item.slug} item={item} order={i + 1} />
             ))}
           </ul>
           <div sx={styles.buttonWrapper}>
@@ -36,6 +34,10 @@ export default function Contents({ onClose }) {
   )
 }
 
+List.propTypes = {
+  onClose: PropTypes.func.isRequired,
+}
+
 const styles = {
   overlay: {
     position: "fixed",
@@ -47,7 +49,7 @@ const styles = {
     backdropFilter: "blur(3px) brightness(90%)",
     zIndex: 1,
   },
-  contents: {
+  list: {
     width: "100%",
     top: 0,
     position: "absolute",
@@ -55,7 +57,7 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
   },
-  listWrapper: {
+  contentsWrapper: {
     position: "relative",
     cursor: "initial",
     width: "276px",
@@ -65,6 +67,12 @@ const styles = {
     borderRadius: "4px",
     marginRight: "-50px",
     zIndex: 2,
+  },
+  contents: {
+    padding: "30px 0",
+    listStyle: "none",
+    paddingInlineStart: 0,
+    margin: "0 10px",
   },
   buttonWrapper: {
     position: "absolute",

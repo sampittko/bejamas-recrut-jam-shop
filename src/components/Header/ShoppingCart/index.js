@@ -1,16 +1,26 @@
 /** @jsx jsx */
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
-import Contents from "./Contents"
+import List from "./List"
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false)
   const [{ isEmpty, itemsCount }] = useContext(ShoppingCartContext)
 
+  useEffect(() => {
+    if (open && isEmpty) {
+      setOpen(false)
+    }
+  }, [open, isEmpty])
+
   return (
     <>
-      <button sx={styles.button} onClick={() => setOpen(!open)}>
+      <button
+        sx={styles.button}
+        disabled={isEmpty}
+        onClick={() => setOpen(!open)}
+      >
         <img
           src="/images/elements/shopping_cart.svg"
           alt="Shopping Cart"
@@ -25,7 +35,7 @@ export default function ShoppingCart() {
           {itemsCount}
         </div>
       </button>
-      {open && <Contents onClose={() => setOpen(false)} />}
+      {open && <List onClose={() => setOpen(false)} />}
     </>
   )
 }
@@ -40,6 +50,19 @@ const styles = {
     border: "none",
     cursor: "pointer",
     zIndex: 2,
+  },
+  shoppingCart: {
+    width: "30px",
+    height: "25px",
+  },
+  chevron: {
+    width: "9px",
+    height: "6px",
+    marginLeft: "5px",
+    transform: "rotate(180deg)",
+  },
+  chevronDown: {
+    transform: "rotate(0deg)",
   },
   badge: {
     width: "11px",
@@ -56,18 +79,5 @@ const styles = {
   },
   badgeEmpty: {
     backgroundColor: "#301346",
-  },
-  shoppingCart: {
-    width: "30px",
-    height: "25px",
-  },
-  chevron: {
-    width: "9px",
-    height: "6px",
-    marginLeft: "5px",
-    transform: "rotate(180deg)",
-  },
-  chevronDown: {
-    transform: "rotate(0deg)",
   },
 }

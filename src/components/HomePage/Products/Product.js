@@ -8,21 +8,32 @@ export default function Product({ product, isInCart }) {
   const [, { addItem, removeItem }] = useContext(ShoppingCartContext)
   const { slug, image, name, excerpt } = product
 
+  function handleClick(e) {
+    e.preventDefault()
+    if (!isInCart) {
+      addItem(product)
+    } else {
+      removeItem(product)
+    }
+  }
+
   return (
-    <li key={product.slug} sx={styles.product}>
-      <img sx={styles.image} src={image} alt={`Vector ${name}`} />
-      <h2 sx={styles.name}>{name}</h2>
-      <p sx={styles.description}>{excerpt}</p>
-      <button
-        sx={{
-          ...styles.action,
-          ...(isInCart && styles.remove),
-        }}
-        onClick={() => (!isInCart ? addItem(product) : removeItem(product))}
-      >
-        {!isInCart ? "+" : "-"}
-      </button>
-    </li>
+    <a href={product.slug}>
+      <li key={slug} sx={styles.product}>
+        <img sx={styles.image} src={image} alt={`Vector ${name}`} />
+        <h2 sx={styles.name}>{name}</h2>
+        <p sx={styles.description}>{excerpt}</p>
+        <button
+          sx={{
+            ...styles.action,
+            ...(isInCart && styles.remove),
+          }}
+          onClick={handleClick}
+        >
+          {!isInCart ? "+" : "-"}
+        </button>
+      </li>
+    </a>
   )
 }
 
@@ -38,6 +49,9 @@ Product.propTypes = {
 
 const styles = {
   product: {
+    "&:hover": {
+      borderColor: "transparent",
+    },
     position: "relative",
     borderRadius: "2px",
     padding: "22px",

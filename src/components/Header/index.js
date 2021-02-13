@@ -26,17 +26,17 @@ const styles = {
     width: "1",
     background: "transparent",
   },
+  container: {
+    maxWidth: ["100%", "552px", "732px", "910px", "1100px", "1320px", "1480px"],
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   mainLink: {
     variant: "text.link",
     color: "white",
     fontWeight: "bold",
     fontSize: 22,
     zIndex: 2,
-  },
-  container: {
-    maxWidth: ["100%", "552px", "732px", "910px", "1100px", "1320px", "1480px"],
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
   },
 }

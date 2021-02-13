@@ -54,6 +54,7 @@ const query = graphql`
               image
               excerpt
               slug
+              price
             }
           }
         }
@@ -83,7 +84,7 @@ const styles = {
     width: "100%",
     height: "273px",
     padding: "0 24px",
-    marginTop: "64px",
+    margin: "64px 0",
   },
   list: {
     height: "100%",
