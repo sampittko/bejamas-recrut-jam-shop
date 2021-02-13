@@ -46,7 +46,7 @@ const styles = {
     height: "32px",
   },
   nameWrapper: {
-    paddingLeft: "3px",
+    paddingLeft: 1,
     width: "70%",
     display: "flex",
     alignItems: "center",
@@ -60,7 +60,7 @@ const styles = {
     textAlign: "center",
     paddingLeft: "10px",
     width: "30%",
-    fontWeight: "500",
+    fontWeight: "medium",
     "&::before": {
       content: '"$"',
     },

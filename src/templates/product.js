@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 import useShoppingCart, { ShoppingCartContext } from "../hooks/useShoppingCart"
 import { graphql } from "gatsby"
 import { Styled } from "theme-ui"
+import { Container } from "../components/Grid"
 
 export const pageQuery = graphql`
   query ProductBySlug($slug: String!) {
@@ -45,23 +46,30 @@ function ProductTemplate({ data }) {
       <Layout>
         <SEO title={name} />
         <div sx={styles.wrapper}>
-          <div sx={styles.imageWrapper}>
-            <img src={image} alt={`Vector ${name}`} sx={styles.image} />
-          </div>
-          <div sx={styles.details}>
-            <p sx={styles.tag}>{tag}</p>
-            <Styled.h2 sx={styles.name}>{name}</Styled.h2>
-            <Styled.p sx={styles.description}>{description}</Styled.p>
-            <p sx={styles.price}>{price}</p>
-            <button
-              sx={{ ...styles.button, ...(isInCart && styles.removeButton) }}
-              onClick={() =>
-                !isInCart ? addItem(product) : removeItem(product)
-              }
-            >
-              {!isInCart ? "Add to cart" : "Remove from cart"}
-            </button>
-          </div>
+          <Container sx={styles.container}>
+            <div sx={styles.imageWrapper}>
+              <img src={image} alt={`Vector ${name}`} sx={styles.image} />
+            </div>
+            <div sx={styles.detailsWrapper}>
+              <div sx={styles.details}>
+                <span sx={styles.tag}>{tag}</span>
+                <Styled.h2 sx={styles.name}>{name}</Styled.h2>
+                <Styled.p sx={styles.description}>{description}</Styled.p>
+                <span sx={styles.price}>{price}</span>
+                <button
+                  sx={{
+                    ...styles.button,
+                    ...(isInCart && styles.removeButton),
+                  }}
+                  onClick={() =>
+                    !isInCart ? addItem(product) : removeItem(product)
+                  }
+                >
+                  {!isInCart ? "Add to cart" : "Remove from cart"}
+                </button>
+              </div>
+            </div>
+          </Container>
         </div>
       </Layout>
     </ShoppingCartContext.Provider>
@@ -81,22 +89,31 @@ const styles = {
     left: 0,
     width: "100vw",
     height: "100vh",
-    overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
+  container: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: ["column", "column", "column", "column", "row", "row"],
+  },
   imageWrapper: {
-    width: "33vw",
+    width: "50%",
+    marginBottom: [4, 4, 5, 7, 0, 0],
   },
   image: {
     display: "block",
     margin: "0 auto",
-    width: "330px",
-    height: "360px",
+    width: ["100%", "100%", "100%", "100%", "440px", "440px"],
+    height: ["100%", "100%", "100%", "100%", "470px", "470px"],
+  },
+  detailsWrapper: {
+    width: "50%",
   },
   details: {
-    width: "33vw",
+    maxWidth: ["100%", "100%", "100%", "100%", "80%", "80%"],
   },
   tag: {
     fontSize: 1,
@@ -110,6 +127,8 @@ const styles = {
     fontSize: 3,
   },
   price: {
+    display: "block",
+    margin: "25px 0 15px 0",
     color: "white",
     fontWeight: "bold",
     fontSize: 4,

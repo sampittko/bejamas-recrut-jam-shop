@@ -3,6 +3,7 @@ import React, { useContext } from "react"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import PropTypes from "prop-types"
+import { Styled } from "theme-ui"
 
 export default function Product({ product, isInCart }) {
   const [, { addItem, removeItem }] = useContext(ShoppingCartContext)
@@ -21,8 +22,8 @@ export default function Product({ product, isInCart }) {
     <a href={product.slug}>
       <li key={slug} sx={styles.product}>
         <img sx={styles.image} src={image} alt={`Vector ${name}`} />
-        <h2 sx={styles.name}>{name}</h2>
-        <p sx={styles.description}>{excerpt}</p>
+        <Styled.h4 sx={styles.name}>{name}</Styled.h4>
+        <Styled.p sx={styles.description}>{excerpt}</Styled.p>
         <button
           sx={{
             ...styles.button,
@@ -55,7 +56,7 @@ const styles = {
     },
     position: "relative",
     borderRadius: "2px",
-    padding: "22px",
+    padding: 5,
     margin: "0 20px",
     boxSizing: "border-box",
     border: "4px solid #969393",
@@ -72,15 +73,13 @@ const styles = {
     margin: "0 auto",
   },
   name: {
-    color: "white",
-    fontSize: 3,
     textTransform: "uppercase",
     marginTop: "35px",
+    marginBottom: 0,
+    fontFamily: "body",
   },
   description: {
-    margin: 0,
     color: "light",
-    fontSize: 2,
   },
   button: {
     padding: 0,

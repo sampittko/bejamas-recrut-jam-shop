@@ -50,6 +50,9 @@ const styles = {
     border: "none",
     cursor: "pointer",
     zIndex: 2,
+    "&:disabled": {
+      cursor: "default",
+    },
   },
   shoppingCart: {
     width: "30px",
@@ -58,7 +61,7 @@ const styles = {
   chevron: {
     width: "9px",
     height: "6px",
-    marginLeft: "5px",
+    marginLeft: 2,
     transform: "rotate(180deg)",
   },
   chevronDown: {

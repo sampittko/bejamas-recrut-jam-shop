@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { useStaticQuery, graphql } from "gatsby"
 import React, { useContext } from "react"
+import { Styled } from "theme-ui"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import { Row, Col } from "../../Grid"
@@ -48,8 +49,8 @@ function HomepageProducts() {
     <section sx={styles.products}>
       <Row>
         <Col>
-          <h1 sx={styles.title}>{section.title}</h1>
-          <p sx={styles.lead}>{section.lead}</p>
+          <Styled.h2 sx={styles.title}>{section.title}</Styled.h2>
+          <Styled.p sx={styles.lead}>{section.lead}</Styled.p>
         </Col>
       </Row>
       <Row styles={styles.listWrapper}>
@@ -76,8 +77,8 @@ function HomepageProducts() {
 
 const styles = {
   products: { paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] },
-  title: { color: "white", fontSize: 5 },
-  lead: { color: "light", maxWidth: "373px", fontSize: 2 },
+  title: { fontFamily: "body" },
+  lead: { maxWidth: "373px" },
   listWrapper: {
     position: "relative",
     overflow: "hidden",
