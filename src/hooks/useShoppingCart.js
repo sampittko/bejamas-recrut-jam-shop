@@ -63,7 +63,10 @@ export default function useShoppingCart(initialItems = []) {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
   }, [items])
 
-  return [items, addItem, removeItem, submit, isEmpty, itemsCount]
+  return [
+    { items, itemsCount, isEmpty },
+    { addItem, removeItem, submit },
+  ]
 }
 
 export const ShoppingCartContext = createContext()

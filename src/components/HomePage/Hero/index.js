@@ -11,26 +11,23 @@ function HomepageHero() {
   const hero = data.file.childMarkdownRemark
 
   return (
-    <section sx={{ paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] }}>
-      <Row styles={{ justifyContent: ["center"] }}>
-        <Col styles={styles.imgWrapper}>
+    <section sx={styles.hero}>
+      <Row styles={styles.row}>
+        <Col styles={styles.imageWrapper}>
           <img
             src={hero.frontmatter.image}
             alt="Vector Monitor"
-            sx={{ maxWidth: "1" }}
+            sx={styles.image}
           />
         </Col>
         <Col styles={styles.leadWrapper}>
           <Styled.h1
-            sx={styles.heading}
+            sx={styles.title}
             dangerouslySetInnerHTML={{ __html: hero.frontmatter.title }}
           />
           <button
             onClick={() => navigate(hero.frontmatter.cta.href)}
-            sx={{
-              variant: ["button.primary", "button.size.large"],
-              mx: ["auto", null, 0],
-            }}
+            sx={styles.cta}
           >
             {hero.frontmatter.cta.text}
           </button>
@@ -64,7 +61,14 @@ const query = graphql`
 `
 
 const styles = {
-  heading: {
+  hero: { paddingTop: [60, 60, 105], paddingBottom: [60, 60, 105] },
+  row: { justifyContent: ["center"] },
+  image: { maxWidth: "1" },
+  cta: {
+    variant: ["button.primary", "button.size.large"],
+    mx: ["auto", null, 0],
+  },
+  title: {
     variant: "text.heading",
     position: "relative",
     ml: [null, null, null, "30px"],
@@ -82,7 +86,7 @@ const styles = {
     },
   },
 
-  imgWrapper: {
+  imageWrapper: {
     width: ["1", "1", "2/5", null, 450],
     textAlign: ["center", "center", "left"],
     order: [2, 2, 1],

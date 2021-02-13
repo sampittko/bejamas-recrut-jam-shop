@@ -6,9 +6,7 @@ import Contents from "./Contents"
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false)
-  const [items, , removeItem, submit, isEmpty, itemsCount] = useContext(
-    ShoppingCartContext
-  )
+  const [{ isEmpty, itemsCount }] = useContext(ShoppingCartContext)
 
   return (
     <>
@@ -27,15 +25,7 @@ export default function ShoppingCart() {
           {itemsCount}
         </div>
       </button>
-      {open && (
-        <Contents
-          items={items}
-          isEmpty={isEmpty}
-          onSubmit={submit}
-          onRemoveItem={removeItem}
-          onClose={() => setOpen(false)}
-        />
-      )}
+      {open && <Contents onClose={() => setOpen(false)} />}
     </>
   )
 }

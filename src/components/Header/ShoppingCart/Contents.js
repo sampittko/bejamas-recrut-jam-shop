@@ -1,23 +1,22 @@
 /** @jsx jsx */
-import React from "react"
+import React, { useContext } from "react"
 import { jsx } from "theme-ui"
+import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import { Container } from "../../Grid"
 
-export default function Contents({
-  items,
-  onClose,
-  onSubmit,
-  onRemoveItem,
-  isEmpty,
-}) {
+export default function Contents({ onClose }) {
+  const [{ items, isEmpty }, { removeItem, submit }] = useContext(
+    ShoppingCartContext
+  )
+
   return (
     <>
       <div sx={styles.overlay} onClick={onClose} />
       <Container sx={styles.contents}>
         <div sx={styles.listWrapper} onClick={(e) => e.stopPropagation()}>
-          <ul sx={styles.list}>
+          <ul>
             {items.map((item) => (
-              <li key={item.slug} onClick={() => onRemoveItem(item)}>
+              <li key={item.slug} onClick={() => removeItem(item)}>
                 {item.name}
               </li>
             ))}
@@ -25,7 +24,7 @@ export default function Contents({
           <div sx={styles.buttonWrapper}>
             <button
               sx={{ variant: ["button.primary", "button.size.small"] }}
-              onClick={onSubmit}
+              onClick={submit}
               disabled={isEmpty}
             >
               Submit
@@ -67,7 +66,6 @@ const styles = {
     marginRight: "-50px",
     zIndex: 2,
   },
-  list: {},
   buttonWrapper: {
     position: "absolute",
     bottom: "23px",
