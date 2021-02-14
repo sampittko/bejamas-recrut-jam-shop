@@ -38,14 +38,14 @@ const styles = {
     zIndex: 1,
     height: "65px",
     width: "65px",
+    backgroundColor: "primary",
+    borderRadius: "100%",
     "&:before": {
       content: "none",
     },
-    backgroundColor: "primary",
     "&:hover": {
       backgroundColor: "accent",
     },
-    borderRadius: "100%",
   },
   leftArrowWrapper: {
     left: ["24px", "16px", "16px", "16px", "-34px"],

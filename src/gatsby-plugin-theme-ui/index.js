@@ -148,7 +148,8 @@ export default {
       cursor: "pointer",
       textTransform: "uppercase",
       "&:hover": {
-        backgroundColor: "primary",
+        backgroundColor: "secondary",
+        color: "primary",
       },
     },
     size: {

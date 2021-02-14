@@ -31,7 +31,7 @@ export default function Product({ product, isInCart }) {
         }}
         onClick={handleClick}
       >
-        {!isInCart ? "+" : "-"}
+        <span sx={styles.inButton}>{!isInCart ? "+" : "-"}</span>
       </button>
     </div>
   )
@@ -75,17 +75,20 @@ const styles = {
     color: "light",
   },
   button: {
+    display: "flex",
+    justifyContent: "center",
     padding: 0,
     position: "absolute",
     bottom: "10px",
     right: "10px",
     variant: ["button.primary"],
-    width: "44px",
-    height: "44px",
-    lineHeight: "44px",
+    minWidth: "50px",
+    height: "50px",
     fontSize: 6,
-    textAlign: "center",
     borderRadius: "100%",
+  },
+  inButton: {
+    height: "100%",
   },
   removeButton: {
     backgroundColor: "secondary",
