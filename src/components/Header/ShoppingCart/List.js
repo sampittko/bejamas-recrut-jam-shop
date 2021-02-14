@@ -47,7 +47,7 @@ const styles = {
     height: "100vh",
     cursor: "pointer",
     backdropFilter: "blur(3px) brightness(90%)",
-    zIndex: 1,
+    zIndex: 2,
   },
   list: {
     padding: [0, 0, 0, "inherit"],
@@ -68,10 +68,12 @@ const styles = {
     border: "2px solid",
     borderRadius: "4px",
     marginRight: [0, "15px", "15px", "30px", "-20px", "-90px", "-50px"],
-    zIndex: 2,
+    zIndex: 3,
   },
   contents: {
-    padding: "30px 0",
+    paddingTop: "30px",
+    height: "calc(100% - 60px - 10px)",
+    overflowY: "scroll",
     listStyle: "none",
     paddingInlineStart: 0,
     margin: "0 10px",

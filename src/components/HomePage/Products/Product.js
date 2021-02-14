@@ -4,13 +4,14 @@ import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import PropTypes from "prop-types"
 import { Styled } from "theme-ui"
+import { navigate } from "gatsby"
 
 export default function Product({ product, isInCart }) {
   const [, { addItem, removeItem }] = useContext(ShoppingCartContext)
   const { slug, image, name, excerpt } = product
 
   function handleClick(e) {
-    e.preventDefault()
+    e.stopPropagation()
     if (!isInCart) {
       addItem(product)
     } else {
@@ -19,22 +20,20 @@ export default function Product({ product, isInCart }) {
   }
 
   return (
-    <a href={product.slug}>
-      <li key={slug} sx={styles.product}>
-        <img sx={styles.image} src={image} alt={`Vector ${name}`} />
-        <Styled.h4 sx={styles.name}>{name}</Styled.h4>
-        <Styled.p sx={styles.description}>{excerpt}</Styled.p>
-        <button
-          sx={{
-            ...styles.button,
-            ...(isInCart && styles.removeButton),
-          }}
-          onClick={handleClick}
-        >
-          {!isInCart ? "+" : "-"}
-        </button>
-      </li>
-    </a>
+    <div sx={styles.product} onClick={() => navigate(slug)}>
+      <img sx={styles.image} src={image} alt={`Vector ${name}`} />
+      <Styled.h4 sx={styles.name}>{name}</Styled.h4>
+      <Styled.p sx={styles.description}>{excerpt}</Styled.p>
+      <button
+        sx={{
+          ...styles.button,
+          ...(isInCart && styles.removeButton),
+        }}
+        onClick={handleClick}
+      >
+        {!isInCart ? "+" : "-"}
+      </button>
+    </div>
   )
 }
 
@@ -44,7 +43,7 @@ Product.propTypes = {
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     excerpt: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
   isInCart: PropTypes.bool.isRequired,
 }
@@ -52,21 +51,15 @@ Product.propTypes = {
 const styles = {
   product: {
     "&:hover": {
-      borderColor: "transparent",
+      borderColor: "secondary",
+      cursor: "pointer",
     },
     position: "relative",
     borderRadius: "2px",
     padding: 5,
     margin: "0 20px",
-    boxSizing: "border-box",
     border: "4px solid #969393",
     backgroundColor: "#331F41",
-    width: "25%",
-    height: "100%",
-    float: "left",
-    "&:first-child": {
-      marginLeft: 0,
-    },
   },
   image: {
     display: "block",

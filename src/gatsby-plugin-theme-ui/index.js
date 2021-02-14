@@ -147,6 +147,9 @@ export default {
       fontWeight: "bold",
       cursor: "pointer",
       textTransform: "uppercase",
+      "&:hover": {
+        backgroundColor: "primary",
+      },
     },
     size: {
       large: {
