@@ -59,7 +59,6 @@ const styles = {
     justifyContent: "flex-end",
   },
   contentsWrapper: {
-    overflow: "hidden",
     position: "relative",
     cursor: "initial",
     width: ["100%", "276px"],

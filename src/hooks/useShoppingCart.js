@@ -41,7 +41,7 @@ export default function useShoppingCart(initialItems = []) {
   const isEmpty = items.length === 0
   const itemsCount = items.length
 
-  function addItem(itemToAdd) {
+  const addItem = function (itemToAdd) {
     if (!itemToAdd) {
       throw new Error(`Specify item that needs to be added first`)
     }
@@ -63,7 +63,7 @@ export default function useShoppingCart(initialItems = []) {
     })
   }
 
-  function removeItem(itemToRemove) {
+  const removeItem = function (itemToRemove) {
     if (!itemToRemove) {
       throw new Error(`Specify item that needs to be removed first`)
     }
@@ -84,7 +84,7 @@ export default function useShoppingCart(initialItems = []) {
     })
   }
 
-  function submit() {
+  const submit = function () {
     if (isEmpty) {
       throw new Error(`Cannot submit empty shopping cart`)
     }

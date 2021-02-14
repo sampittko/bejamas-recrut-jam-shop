@@ -10,7 +10,7 @@ export default function Product({ product, isInCart }) {
   const [, { addItem, removeItem }] = useContext(ShoppingCartContext)
   const { slug, image, name, excerpt } = product
 
-  function handleClick(e) {
+  const handleClick = function (e) {
     e.stopPropagation()
     if (!isInCart) {
       addItem(product)
@@ -70,9 +70,17 @@ const styles = {
     marginTop: "35px",
     marginBottom: 0,
     fontFamily: "body",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    width: "90%",
   },
   description: {
     color: "light",
+    overflow: "hidden",
+    lineHeight: "24px",
+    height: "72px",
+    width: "80%",
   },
   button: {
     display: "flex",
@@ -89,6 +97,7 @@ const styles = {
   },
   inButton: {
     height: "100%",
+    paddingLeft: "1.5px",
   },
   removeButton: {
     backgroundColor: "secondary",

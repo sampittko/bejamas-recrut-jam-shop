@@ -17,9 +17,8 @@ const sliderSettings = {
   infinite: true,
   speed: 500,
   slidesToShow: 4,
-  slidesToScroll: 4,
   autoplay: true,
-  autoplaySpeed: 7500,
+  autoplaySpeed: 5000,
   nextArrow: <SliderArrow orientation="right" />,
   prevArrow: <SliderArrow orientation="left" />,
   responsive: [
@@ -27,42 +26,18 @@ const sliderSettings = {
       breakpoint: 1440,
       settings: {
         slidesToShow: 3,
-        slideToScroll: 3,
       },
     },
     {
       breakpoint: 1240,
       settings: {
         slidesToShow: 2,
-        slideToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 1100,
-      settings: {
-        slidesToShow: 2,
-        slideToScroll: 2,
       },
     },
     {
       breakpoint: 960,
       settings: {
         slidesToShow: 1,
-        slideToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 742,
-      settings: {
-        slidesToShow: 1,
-        slideToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 552,
-      settings: {
-        slidesToShow: 1,
-        slideToScroll: 1,
       },
     },
   ],
@@ -139,9 +114,10 @@ const styles = {
   title: { fontFamily: "body" },
   lead: { maxWidth: "373px" },
   slider: {
+    maxWidth: "100vw",
     position: "relative",
     width: "calc(100% + 40px)",
-    left: "-20px",
+    left: [0, "-20px"],
     height: "273px",
     padding: "0 24px",
     margin: "64px 0",

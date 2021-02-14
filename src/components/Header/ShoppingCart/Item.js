@@ -32,6 +32,7 @@ Item.propTypes = {
 
 const styles = {
   item: {
+    paddingBottom: 1,
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",

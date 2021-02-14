@@ -1,12 +1,19 @@
 /** @jsx jsx */
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import List from "./List"
+import classNames from "classnames"
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false)
   const [{ isEmpty, itemsCount }] = useContext(ShoppingCartContext)
+
+  const [onEmptyAnimation, setOnEmptyAnimation] = useState(false)
+  const [onAddItemAnimation, setOnAddItemAnimation] = useState(false)
+  const [onRemoveItemAnimation, setOnRemoveItemAnimation] = useState(false)
+
+  const prevItemsCount = useRef(itemsCount)
 
   useEffect(() => {
     if (open && isEmpty) {
@@ -14,12 +21,40 @@ export default function ShoppingCart() {
     }
   }, [open, isEmpty])
 
+  useEffect(() => {
+    if (itemsCount > prevItemsCount.current) {
+      setOnAddItemAnimation(true)
+    } else {
+      setOnRemoveItemAnimation(true)
+    }
+    prevItemsCount.current = itemsCount
+  }, [itemsCount])
+
+  const handleClick = function () {
+    if (isEmpty) {
+      setOnEmptyAnimation(true)
+    } else {
+      setOpen(!open)
+    }
+  }
+
+  const handleBadgeAnimationEnd = function () {
+    setOnAddItemAnimation(false)
+    setOnRemoveItemAnimation(false)
+  }
+
   return (
     <>
       <button
         sx={styles.button}
-        disabled={isEmpty}
-        onClick={() => setOpen(!open)}
+        className={classNames([
+          "animate__animated",
+          {
+            ["animate__headShake"]: onEmptyAnimation,
+          },
+        ])}
+        onClick={handleClick}
+        onAnimationEnd={() => setOnEmptyAnimation(false)}
       >
         <img
           src="/images/elements/shopping_cart.svg"
@@ -31,7 +66,17 @@ export default function ShoppingCart() {
           alt=""
           sx={{ ...styles.chevron, ...(open && styles.chevronDown) }}
         />
-        <div sx={{ ...styles.badge, ...(isEmpty && styles.badgeEmpty) }}>
+        <div
+          sx={{ ...styles.badge, ...(isEmpty && styles.badgeEmpty) }}
+          className={classNames([
+            "animate__animated",
+            {
+              ["animate__flash"]: onRemoveItemAnimation,
+              ["animate__bounce"]: onAddItemAnimation,
+            },
+          ])}
+          onAnimationEnd={handleBadgeAnimationEnd}
+        >
           {itemsCount}
         </div>
       </button>
@@ -50,9 +95,6 @@ const styles = {
     border: "none",
     cursor: "pointer",
     zIndex: 2,
-    "&:disabled": {
-      cursor: "default",
-    },
   },
   shoppingCart: {
     width: "30px",
