@@ -22,9 +22,11 @@ function shoppingCartReducer(items, action) {
 }
 
 function init(initialItems) {
-  const itemsInLocalStorage = window.localStorage.getItem(LOCAL_STORAGE_KEY)
-  if (itemsInLocalStorage) {
-    return JSON.parse(itemsInLocalStorage)
+  if (typeof window !== "undefined") {
+    const itemsInLocalStorage = window.localStorage.getItem(LOCAL_STORAGE_KEY)
+    if (itemsInLocalStorage) {
+      return JSON.parse(itemsInLocalStorage)
+    }
   }
   return initialItems
 }
@@ -93,7 +95,9 @@ export default function useShoppingCart(initialItems = []) {
   }
 
   useEffect(() => {
-    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
+    }
   }, [items])
 
   return [
