@@ -16,15 +16,9 @@ export default function ShoppingCart() {
   const prevItemsCount = useRef(itemsCount)
 
   useEffect(() => {
-    if (open && isEmpty) {
-      setOpen(false)
-    }
-  }, [open, isEmpty])
-
-  useEffect(() => {
     if (itemsCount > prevItemsCount.current) {
       setOnAddItemAnimation(true)
-    } else {
+    } else if (itemsCount < prevItemsCount.current) {
       setOnRemoveItemAnimation(true)
     }
     prevItemsCount.current = itemsCount

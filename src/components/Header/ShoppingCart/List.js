@@ -1,19 +1,55 @@
 /** @jsx jsx */
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { jsx } from "theme-ui"
 import { ShoppingCartContext } from "../../../hooks/useShoppingCart"
 import { Container } from "../../Grid"
 import PropTypes from "prop-types"
 import Item from "./Item"
+import classNames from "classnames"
 
 export default function List({ onClose }) {
   const [{ items, isEmpty }, { submit }] = useContext(ShoppingCartContext)
 
+  const [onCloseAnimation, setOnCloseAnimation] = useState(false)
+
+  const handleAnimationEnd = function () {
+    if (onCloseAnimation) {
+      onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (isEmpty) {
+      setOnCloseAnimation(true)
+    }
+  }, [isEmpty])
+
   return (
     <>
-      <div sx={styles.overlay} onClick={onClose} />
+      <div
+        sx={styles.overlay}
+        onClick={() => setOnCloseAnimation(true)}
+        className={classNames([
+          "animate__animated",
+          {
+            ["animate__fadeIn"]: true,
+            ["animate__fadeOut"]: onCloseAnimation,
+          },
+        ])}
+        onAnimationEnd={handleAnimationEnd}
+      />
       <Container sx={styles.list}>
-        <div sx={styles.contentsWrapper} onClick={(e) => e.stopPropagation()}>
+        <div
+          sx={styles.contentsWrapper}
+          onClick={(e) => e.stopPropagation()}
+          className={classNames([
+            "animate__animated",
+            {
+              ["animate__fadeInDown"]: true,
+              ["animate__fadeOutUpBig"]: onCloseAnimation,
+            },
+          ])}
+        >
           <ul sx={styles.contents}>
             {items.map((item, i) => (
               <Item key={item.slug} item={item} order={i + 1} />
