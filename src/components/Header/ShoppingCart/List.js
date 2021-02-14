@@ -50,7 +50,8 @@ const styles = {
     zIndex: 1,
   },
   list: {
-    width: "100%",
+    padding: [0, 0, 0, "inherit"],
+    width: ["90vw", "100%"],
     top: 0,
     position: "absolute",
     marginTop: "calc(34px + 40px)",
@@ -58,14 +59,15 @@ const styles = {
     justifyContent: "flex-end",
   },
   contentsWrapper: {
+    overflow: "hidden",
     position: "relative",
     cursor: "initial",
-    width: "276px",
+    width: ["100%", "276px"],
     height: "281px",
     backgroundColor: "primary",
     border: "2px solid",
     borderRadius: "4px",
-    marginRight: "-50px",
+    marginRight: [0, "15px", "15px", "30px", "-20px", "-90px", "-50px"],
     zIndex: 2,
   },
   contents: {
