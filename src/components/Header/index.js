@@ -37,6 +37,6 @@ const styles = {
     color: "white",
     fontWeight: "bold",
     fontSize: 22,
-    zIndex: 2,
+    zIndex: 3,
   },
 }

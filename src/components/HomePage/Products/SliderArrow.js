@@ -40,7 +40,7 @@ const styles = {
     width: "65px",
     backgroundColor: "primary",
     borderRadius: "100%",
-    top: "55%",
+    top: ["28%", "28%", "28%", "55%"],
     "&:before": {
       content: "none",
     },

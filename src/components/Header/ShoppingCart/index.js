@@ -88,7 +88,7 @@ const styles = {
     backgroundColor: "transparent",
     border: "none",
     cursor: "pointer",
-    zIndex: 2,
+    zIndex: 3,
   },
   shoppingCart: {
     width: "30px",
